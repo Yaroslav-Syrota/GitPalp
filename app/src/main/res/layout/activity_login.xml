@@ -13,27 +13,95 @@
 
     </data>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_authorization">
+        android:fillViewport="true">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="@drawable/shape_authorization">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/element_horizontal_padding"
+                android:layout_marginRight="@dimen/element_horizontal_padding"
+                android:layout_marginBottom="@dimen/view_vertical_margin_normal"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/view_vertical_margin_big"
+                    android:layout_marginBottom="@dimen/view_vertical_margin_pre_big"
+                    android:src="@drawable/ic_authorization"/>
 
-        <ProgressBar
-            style="@style/ProgressBarStyle"
-            android:indeterminate="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_centerInParent="true"
-            android:visibility="@{viewModel.isProgressVisible ? View.VISIBLE : View.GONE}"/>
+                <EditText
+                    style="@style/BaseTheme.EditText.WithStroke"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"/>
 
-    </FrameLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/etPassword_LA"
+                        style="@style/BaseTheme.EditText.WithStroke"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="@dimen/element_horizontal_padding"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBottom="@+id/etPassword_LA"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_visibility"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/primaryText"
+                    android:textSize="@dimen/text_size_button"
+                    android:layout_marginTop="@dimen/view_vertical_margin_normal"
+                    android:text="@string/check_your_details"/>
+
+                <TextView
+                    style="@style/BaseTheme.Button.Accent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login"
+                    android:layout_marginTop="@dimen/view_vertical_margin_pre_big"/>
+
+            </LinearLayout>
+
+            <ProgressBar
+                style="@style/ProgressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="@{viewModel.isProgressVisible ? View.VISIBLE : View.GONE}" />
+
+        </FrameLayout>
+    </ScrollView>
 </layout>

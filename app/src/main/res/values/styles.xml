@@ -23,4 +23,36 @@
         <item name="colorControlNormal">@color/lightPrimary</item>
     </style>
 
+    <style name="BaseTheme.EditText">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/element_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/element_vertical_padding</item>
+        <item name="android:paddingLeft">@dimen/element_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/element_horizontal_padding</item>
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textColorHint">@color/secondaryText</item>
+        <item name="android:background">@color/lightPrimary</item>
+        <item name="android:textCursorDrawable">@drawable/shape_edittext_cursor</item>
+    </style>
+
+    <style name="BaseTheme.EditText.WithStroke" parent="BaseTheme.EditText">
+        <item name="android:background">@drawable/edit_background</item>
+        <item name="android:layout_marginBottom">@dimen/view_vertical_margin_small</item>
+    </style>
+
+    <style name="BaseTheme.Button">
+        <item name="android:paddingTop">@dimen/element_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/element_vertical_padding</item>
+        <item name="android:paddingLeft">@dimen/element_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/element_horizontal_padding</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/text_size_button</item>
+        <item name="android:textColor">@color/lightPrimary</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="BaseTheme.Button.Accent" parent="BaseTheme.Button">
+        <item name="android:background">@drawable/selector_button_accent</item>
+    </style>
+
 </resources>

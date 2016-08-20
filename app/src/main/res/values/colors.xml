@@ -8,4 +8,9 @@
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#757575</color>
     <color name="dividerColor">#BDBDBD</color>
+
+    <color name="base_white">#FFFFFF</color>
+    <color name="base_red">#EA2727</color>
+    <color name="error_field_red">#8dfb4447</color>
+    <color name="color_pressed_button">#2a7da6</color>
 </resources>

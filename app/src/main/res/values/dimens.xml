@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="layout_padding">16dp</dimen>
+
+    <dimen name="text_small">10sp</dimen>
+    <dimen name="text_normal">13sp</dimen>
+    <dimen name="text_size_button">15sp</dimen>
+    <dimen name="text_big">17sp</dimen>
+
+    <dimen name="view_vertical_margin_small">10dp</dimen>
+    <dimen name="view_vertical_margin_normal">20dp</dimen>
+    <dimen name="view_vertical_margin_pre_big">55dp</dimen>
+    <dimen name="view_vertical_margin_big">70dp</dimen>
+
+    <dimen name="element_vertical_padding">12dp</dimen>
+    <dimen name="element_horizontal_padding">15dp</dimen>
+</resources>
