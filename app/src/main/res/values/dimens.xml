@@ -15,4 +15,11 @@
 
     <dimen name="element_vertical_padding">12dp</dimen>
     <dimen name="element_horizontal_padding">15dp</dimen>
+
+    <dimen name="container_padding">18dp</dimen>
+    <dimen name="container_padding_half">9dp</dimen>
+    <dimen name="container_padding_quart">5dp</dimen>
+
+    <dimen name="textview_padding_default">5dp</dimen>
+    <dimen name="textview_padding_normal">8dp</dimen>
 </resources>

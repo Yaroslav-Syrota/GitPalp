@@ -16,7 +16,7 @@ import ua.com.thinkmobiles.gitpalp.R;
 public class SplashActivity extends AppCompatActivity {
 
     private Handler handler;
-    private static final long SPLASH_DELAY = 3000;
+    private static final long SPLASH_DELAY = 2000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,13 +27,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private final Runnable mSplashRunnable = () -> {
-        final Intent launchIntent;
-        launchIntent = new Intent(SplashActivity.this, LoginActivity.class);
-        launchIntent.setFlags(IntentCompat.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
         if (handler != null)
             handler.removeCallbacks(this.mSplashRunnable);
-        startActivity(launchIntent);
+
+        LoginActivity.startItAlone(this);
         finish();
     };
 

@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="ua.com.thinkmobiles.gitpalp.viewmodel.activity_vm.LoginActivityVM.FieldType" />
+
         <variable
             name="viewModel"
             type="ua.com.thinkmobiles.gitpalp.viewmodel.activity_vm.LoginActivityVM" />
@@ -22,6 +24,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_authorization">
+
+            <ProgressBar
+                style="@style/ProgressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="@{viewModel.isProgressVisible ? View.VISIBLE : View.GONE}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +57,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    app:backgroundListener="@{viewModel.backgroundListener}"
+                    app:binding="@{viewModel.email}"
+                    app:type="@{FieldType.EMAIL}"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -59,7 +73,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/password"
                         android:imeOptions="actionDone"
-                        android:inputType="textPassword"/>
+                        android:inputType="textPassword"
+                        app:backgroundListener="@{viewModel.backgroundListener}"
+                        app:binding="@{viewModel.password}"
+                        app:type="@{FieldType.PASSWORD}"/>
 
                     <ImageButton
                         android:layout_width="wrap_content"
@@ -72,7 +89,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignBottom="@+id/etPassword_LA"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/ic_visibility"/>
+                        android:src="@drawable/ic_visibility"
+                        android:onClick="@{viewModel::onClickEye}"/>
                 </RelativeLayout>
 
                 <TextView
@@ -89,18 +107,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/login"
-                    android:layout_marginTop="@dimen/view_vertical_margin_pre_big"/>
+                    android:layout_marginTop="@dimen/view_vertical_margin_pre_big"
+                    android:clickable="true"
+                    android:onClick="@{viewModel::clickLogin}"/>
 
             </LinearLayout>
-
-            <ProgressBar
-                style="@style/ProgressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:visibility="@{viewModel.isProgressVisible ? View.VISIBLE : View.GONE}" />
 
         </FrameLayout>
     </ScrollView>
