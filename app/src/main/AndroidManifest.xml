@@ -1,11 +1,28 @@
-<manifest package="ua.com.thinkmobiles.gitpalp"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ua.com.thinkmobiles.gitpalp">
 
-    <application android:allowBackup="true"
-                 android:icon="@mipmap/ic_launcher"
-                 android:label="@string/app_name"
-                 android:supportsRtl="true"
-                 android:theme="@style/AppTheme">
+    <application
+        android:name=".GitPalpApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/BaseTheme">
+
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
 
     </application>
 

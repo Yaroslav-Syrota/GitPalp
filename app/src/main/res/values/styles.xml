@@ -1,11 +1,26 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/secondaryText</item>
+        <item name="android:progressBarStyle">@style/ProgressBarStyle</item>
+    </style>
+
+    <style name="ProgressBarStyle" parent="Base.Widget.AppCompat.ProgressBar">
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorAccent">@color/lightPrimary</item>
+        <item name="android:progressDrawable">@drawable/progress_layer_list</item>
+    </style>
+
+    <style name="FullScreenTheme" parent="BaseTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlActivated">@color/lightPrimary</item>
+        <item name="android:textColorHint">@color/lightPrimary</item>
+        <item name="colorControlNormal">@color/lightPrimary</item>
     </style>
 
 </resources>
