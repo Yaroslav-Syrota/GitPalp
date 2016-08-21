@@ -17,7 +17,6 @@ import ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.SearchRowVM;
 
 public class ProfileActivityVM extends SearchRowVM {
 
-    private Context context;
     public final ObservableBoolean isProgressVisible = new ObservableBoolean(false);
 
     public final ObservableField<String> avatar         = new ObservableField<>();
@@ -26,7 +25,7 @@ public class ProfileActivityVM extends SearchRowVM {
     public final CircleTransform circleTransform;
 
     public ProfileActivityVM(Context context, BackClicklistener backClicklistener, boolean isBackVisible) {
-        super(backClicklistener, isBackVisible);
+        super(context, backClicklistener, isBackVisible);
         this.context    = context;
         circleTransform = new CircleTransform(context);
     }

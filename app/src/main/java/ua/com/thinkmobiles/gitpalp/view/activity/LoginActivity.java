@@ -21,7 +21,7 @@ import ua.com.thinkmobiles.gitpalp.viewmodel.activity_vm.LoginActivityVM;
 public class LoginActivity extends BaseActivity implements LoginActivityVM.LoginListener {
 
     public ActivityLoginBinding loginBinding;
-    private LoginActivityVM     loginActivityVM;
+    private LoginActivityVM loginActivityVM;
 
 
     public static void startItAlone(final Context context) {
@@ -35,9 +35,9 @@ public class LoginActivity extends BaseActivity implements LoginActivityVM.Login
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        injectDataBinding(loginBinding  = DataBindingUtil.setContentView(this, R.layout.activity_login));
+        injectDataBinding(loginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login));
         injectViewModel(loginActivityVM = new LoginActivityVM(this, this));
-        loginBinding                    .setViewModel(loginActivityVM);
+        loginBinding.setViewModel(loginActivityVM);
     }
 
 

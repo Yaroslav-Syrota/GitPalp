@@ -11,11 +11,10 @@ import ua.com.thinkmobiles.gitpalp.viewmodel.ViewModel;
 
 public abstract class BaseDialogVM extends ViewModel{
 
-    protected Context context;
     protected DialogCloseListener closeListener;
 
     public BaseDialogVM(Context context, DialogCloseListener listener) {
-        this.context    = context;
+        super(context);
         closeListener   = listener;
     }
 
@@ -23,11 +22,7 @@ public abstract class BaseDialogVM extends ViewModel{
         closeListener.closeDialog();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        context = null;
-    }
+
 
     public interface DialogCloseListener {
         void closeDialog();

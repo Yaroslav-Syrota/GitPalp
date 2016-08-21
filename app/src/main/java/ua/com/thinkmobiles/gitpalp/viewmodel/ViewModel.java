@@ -1,5 +1,8 @@
 package ua.com.thinkmobiles.gitpalp.viewmodel;
 
+import android.content.Context;
+
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -8,11 +11,22 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class ViewModel {
 
-    protected CompositeSubscription compositeSubscription = new CompositeSubscription();
+    protected Context context;
+    private CompositeSubscription compositeSubscription = new CompositeSubscription();
+
+
+    public ViewModel(Context context) {
+        this.context = context;
+    }
 
     public void onDestroy() {
         if(compositeSubscription.hasSubscriptions()) {
             compositeSubscription.unsubscribe();
         }
+        context = null;
+    }
+
+    protected void addSubscription(Subscription _subscription){
+        compositeSubscription.add(_subscription);
     }
 }

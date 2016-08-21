@@ -1,5 +1,6 @@
 package ua.com.thinkmobiles.gitpalp.viewmodel.row_vm;
 
+import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.view.View;
 
@@ -17,7 +18,8 @@ public abstract class SearchRowVM extends ViewModel {
     private BackClicklistener backClicklistener;
 
 
-    public SearchRowVM(BackClicklistener backClicklistener, boolean isBackVisible) {
+    public SearchRowVM(Context context, BackClicklistener backClicklistener, boolean isBackVisible) {
+        super(context);
         this.backClicklistener  = backClicklistener;
         this.isBackVisible      .set(isBackVisible);
     }
