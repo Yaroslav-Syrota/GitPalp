@@ -4,12 +4,10 @@ import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import ua.com.thinkmobiles.gitpalp.R;
 import ua.com.thinkmobiles.gitpalp.binding.BindableString;
 import ua.com.thinkmobiles.gitpalp.listener.EdittextBackgroundListener;
-import ua.com.thinkmobiles.gitpalp.utils.KeybordUtils;
 import ua.com.thinkmobiles.gitpalp.utils.ValidationUtils;
 import ua.com.thinkmobiles.gitpalp.view.dialog.MessageDialog;
 import ua.com.thinkmobiles.gitpalp.viewmodel.ViewModel;
@@ -43,7 +41,8 @@ public class LoginActivityVM extends ViewModel {
     public void clickLogin(View view) {
         loginListener.hideKeyboard();
         if(validData()) {
-            Toast.makeText(context, "login", Toast.LENGTH_SHORT).show();
+            ValidationUtils.unDoubleClick(view);
+            login();
         }
     }
 
@@ -85,7 +84,7 @@ public class LoginActivityVM extends ViewModel {
     }
 
     private void login() {
-
+        isProgressVisible.set(true);
     }
 
 
