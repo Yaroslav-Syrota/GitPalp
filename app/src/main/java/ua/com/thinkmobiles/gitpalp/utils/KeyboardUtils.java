@@ -9,7 +9,7 @@ import android.widget.EditText;
  * Created by CAT_Caterpiller on 20.08.2016.
  */
 
-public class KeybordUtils {
+public class KeyboardUtils {
 
     public static void hideSoftKeyboard(final Activity _activity) {
         if(_activity != null && _activity.getCurrentFocus() != null) {

@@ -9,6 +9,7 @@ import ua.com.thinkmobiles.gitpalp.R;
 import ua.com.thinkmobiles.gitpalp.binding.BindableString;
 import ua.com.thinkmobiles.gitpalp.listener.EdittextBackgroundListener;
 import ua.com.thinkmobiles.gitpalp.utils.ValidationUtils;
+import ua.com.thinkmobiles.gitpalp.view.activity.HomeActivity;
 import ua.com.thinkmobiles.gitpalp.view.dialog.MessageDialog;
 import ua.com.thinkmobiles.gitpalp.viewmodel.ViewModel;
 
@@ -84,7 +85,8 @@ public class LoginActivityVM extends ViewModel {
     }
 
     private void login() {
-        isProgressVisible.set(true);
+        //TODO add request from server
+        HomeActivity.startItAlone(context);
     }
 
 

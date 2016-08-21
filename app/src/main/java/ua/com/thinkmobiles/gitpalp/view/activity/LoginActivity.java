@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import ua.com.thinkmobiles.gitpalp.R;
 import ua.com.thinkmobiles.gitpalp.databinding.ActivityLoginBinding;
-import ua.com.thinkmobiles.gitpalp.utils.KeybordUtils;
+import ua.com.thinkmobiles.gitpalp.utils.KeyboardUtils;
 import ua.com.thinkmobiles.gitpalp.viewmodel.activity_vm.LoginActivityVM;
 
 /**
@@ -35,9 +35,9 @@ public class LoginActivity extends BaseActivity implements LoginActivityVM.Login
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        injectDataBinding(loginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login));
+        injectDataBinding(loginBinding  = DataBindingUtil.setContentView(this, R.layout.activity_login));
         injectViewModel(loginActivityVM = new LoginActivityVM(this, this));
-        loginBinding.setViewModel(loginActivityVM);
+        loginBinding                    .setViewModel(loginActivityVM);
     }
 
 
@@ -60,6 +60,6 @@ public class LoginActivity extends BaseActivity implements LoginActivityVM.Login
 
     @Override
     public void hideKeyboard() {
-        KeybordUtils.hideSoftKeyboard(this);
+        KeyboardUtils.hideSoftKeyboard(this);
     }
 }

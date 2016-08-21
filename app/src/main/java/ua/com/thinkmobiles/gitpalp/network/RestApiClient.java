@@ -54,4 +54,8 @@ public class RestApiClient {
     public Gson getGson() {
         return gson;
     }
+
+    public ApiAuthorithation auth() {
+        return retrofit.create(ApiAuthorithation.class);
+    }
 }
