@@ -18,8 +18,8 @@ import ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.SearchRowVM;
 
 public class ProfileActivity extends BaseActivity implements SearchRowVM.BackClicklistener{
 
-    public ActivityProfileBinding profileBinding;
-    private ProfileActivityVM homeActivityVM;
+    public ActivityProfileBinding   profileBinding;
+    private ProfileActivityVM       profileActivityVM;
 
 
     public static void startItAlone(final Context context) {
@@ -34,8 +34,8 @@ public class ProfileActivity extends BaseActivity implements SearchRowVM.BackCli
         super.onCreate(savedInstanceState);
 
         injectDataBinding(profileBinding    = DataBindingUtil.setContentView(this, R.layout.activity_profile));
-        injectViewModel(homeActivityVM      = new ProfileActivityVM(this, this, false));
-        profileBinding                      .setViewModel(homeActivityVM);
+        injectViewModel(profileActivityVM   = new ProfileActivityVM(this, this, false));
+        profileBinding                      .setViewModel(profileActivityVM);
     }
 
     @Override
