@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="ua.com.thinkmobiles.gitpalp.viewmodel.activity_vm.ProfileActivityVM" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/profile_background"
+        android:orientation="vertical"
+        android:padding="@dimen/container_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp">
+
+            <ImageView
+                android:id="@+id/ivAvatarUser_FP"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_avatar"
+                app:glideDefault="@{@drawable/ic_avatar}"
+                app:glideImage="@{viewModel.avatar}"
+                app:glidePlaceholder="@{@drawable/ic_avatar}"
+                app:glideTransform="@{viewModel.circleTransform}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@{viewModel.name}"
+                android:textColor="@color/primaryText"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="CAT_Caterpiller" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.description}"
+            tools:text="CAT_Caterpiller description"/>
+
+    </LinearLayout>
+</layout>

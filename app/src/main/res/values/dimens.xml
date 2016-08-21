@@ -20,6 +20,9 @@
     <dimen name="container_padding_half">9dp</dimen>
     <dimen name="container_padding_quart">5dp</dimen>
 
+    <dimen name="textview_padding_vertical">2dp</dimen>
     <dimen name="textview_padding_default">5dp</dimen>
     <dimen name="textview_padding_normal">8dp</dimen>
+
+    <dimen name="avatar_size">50dp</dimen>
 </resources>

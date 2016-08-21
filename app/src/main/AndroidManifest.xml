@@ -27,7 +27,7 @@
             android:theme="@style/FullScreenTheme"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
 
-        <activity android:name=".view.activity.HomeActivity"
+        <activity android:name=".view.activity.ProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme"
             android:windowSoftInputMode="adjustResize|stateHidden"/>

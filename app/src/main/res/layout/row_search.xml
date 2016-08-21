@@ -12,12 +12,51 @@
             type="ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.SearchRowVM" />
     </data>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/btnBack_RS"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/element_horizontal_padding"
+            android:clickable="@{viewModel.isBackVisible}"
+            android:visibility="@{viewModel.isBackVisible ? View.VISIBLE : View.GONE}"
+            android:onClick="@{viewModel::clickBack}"
+            android:src="@drawable/ic_arrow_back" />
 
-        <LinearLayout
+        <ImageButton
+            android:id="@+id/btnSearch_RS"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/element_horizontal_padding"
+            android:paddingRight="@dimen/element_horizontal_padding"
+            android:onClick="@{viewModel::clickSearch}"
+            android:src="@drawable/ic_search"/>
+
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="@dimen/textview_padding_vertical"
+            android:paddingBottom="@dimen/textview_padding_vertical"
+            android:paddingLeft="@dimen/textview_padding_default"
+            android:paddingRight="@dimen/textview_padding_default"
+            android:layout_marginLeft="@dimen/element_horizontal_padding"
+            android:layout_toRightOf="@id/btnBack_RS"
+            android:layout_toLeftOf="@id/btnSearch_RS"
+            android:textColor="@color/primaryText"
+            android:textColorHint="@color/secondaryText"
+            android:hint="@string/search"
+            app:bindableString="@{viewModel.search}"
+            android:background="@drawable/bg_search_field"/>
+    </RelativeLayout>
 
 </layout>
