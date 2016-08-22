@@ -16,12 +16,12 @@ import ua.com.thinkmobiles.gitpalp.model.response.SearchQueryResponse;
 public interface ApiRepository {
 
     @GET("user")
-    Observable<CurrentUserResponse> getCurrentUser(@Query("access_token") String _token);
+    Observable<CurrentUserResponse> getCurrentUser(@Query("access_token") String token);
 
 
     @GET("user/repos")
-    Observable<List<CurrentUserRepositories>> getCurrentUserRepos(@Query("access_token") String _token);
+    Observable<List<CurrentUserRepositories>> getCurrentUserRepos(@Query("access_token") String token);
 
     @GET("search/repositories")
-    Observable<SearchQueryResponse> search(@Query("q") String _searchQuery);
+    Observable<SearchQueryResponse> search(@Query("q") String searchQuery);
 }

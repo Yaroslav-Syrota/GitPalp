@@ -29,13 +29,11 @@
 
         <activity android:name=".view.activity.ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:theme="@style/FullScreenTheme"/>
 
         <activity android:name=".view.activity.RepositoryActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:theme="@style/FullScreenTheme"/>
 
     </application>
 

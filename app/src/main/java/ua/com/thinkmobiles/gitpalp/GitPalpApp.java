@@ -2,6 +2,8 @@ package ua.com.thinkmobiles.gitpalp;
 
 import android.app.Application;
 
+import ua.com.thinkmobiles.gitpalp.data.DataStorage;
+
 /**
  * Created by CAT_Caterpiller on 19.08.2016.
  */
@@ -19,5 +21,6 @@ public class GitPalpApp extends Application {
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
+        DataStorage.initSharedPref(INSTANCE.getApplicationContext());
     }
 }

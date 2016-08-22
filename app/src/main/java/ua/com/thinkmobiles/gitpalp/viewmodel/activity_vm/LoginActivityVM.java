@@ -15,12 +15,14 @@ import rx.schedulers.Schedulers;
 import ua.com.thinkmobiles.gitpalp.GitPalpApp;
 import ua.com.thinkmobiles.gitpalp.R;
 import ua.com.thinkmobiles.gitpalp.binding.BindableString;
+import ua.com.thinkmobiles.gitpalp.data.DataStorage;
 import ua.com.thinkmobiles.gitpalp.listener.EdittextBackgroundListener;
 import ua.com.thinkmobiles.gitpalp.model.request.LoginRequest;
 import ua.com.thinkmobiles.gitpalp.model.response.LoginResponse;
 import ua.com.thinkmobiles.gitpalp.network.RestApiClient;
 import ua.com.thinkmobiles.gitpalp.utils.GithubUtils;
 import ua.com.thinkmobiles.gitpalp.utils.ValidationUtils;
+import ua.com.thinkmobiles.gitpalp.view.activity.ProfileActivity;
 import ua.com.thinkmobiles.gitpalp.view.dialog.MessageDialog;
 import ua.com.thinkmobiles.gitpalp.viewmodel.ViewModel;
 
@@ -114,7 +116,7 @@ public class LoginActivityVM extends ViewModel {
                 .doOnNext(loginResponses    -> onCheckAlreadyExistUser(basic, loginResponses))
                 .flatMap(loginResponse      -> RestApiClient.getInstance().auth()
                         .login(basic, loginRequest))
-                .map(_loginResponse1        -> _loginResponse1.token)
+                .map(loginResponse1         -> loginResponse1.token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onGetTokenSuccess, this::onGetTokenError));
@@ -131,8 +133,8 @@ public class LoginActivityVM extends ViewModel {
     }
 
     private void onGetTokenSuccess(String token) {
-        Toast.makeText(GitPalpApp.getInstance(), token, Toast.LENGTH_SHORT).show();
-        // TODO: make saving token and start Activity
+        DataStorage.saveToken(token);
+        ProfileActivity.startItAlone(context);
     }
 
     private void onGetTokenError(Throwable throwable) {
