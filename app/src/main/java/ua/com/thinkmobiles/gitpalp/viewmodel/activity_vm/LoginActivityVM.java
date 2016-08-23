@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
 
+import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,8 +19,13 @@ import ua.com.thinkmobiles.gitpalp.binding.BindableString;
 import ua.com.thinkmobiles.gitpalp.data.DataStorage;
 import ua.com.thinkmobiles.gitpalp.listener.EdittextBackgroundListener;
 import ua.com.thinkmobiles.gitpalp.model.request.LoginRequest;
+import ua.com.thinkmobiles.gitpalp.model.response.ErrorResponse;
 import ua.com.thinkmobiles.gitpalp.model.response.LoginResponse;
 import ua.com.thinkmobiles.gitpalp.network.RestApiClient;
+import ua.com.thinkmobiles.gitpalp.network.task.ApiTask;
+import ua.com.thinkmobiles.gitpalp.network.task.ClearAuthorization;
+import ua.com.thinkmobiles.gitpalp.network.task.GetAuthorization;
+import ua.com.thinkmobiles.gitpalp.network.task.Login;
 import ua.com.thinkmobiles.gitpalp.utils.GithubUtils;
 import ua.com.thinkmobiles.gitpalp.utils.ValidationUtils;
 import ua.com.thinkmobiles.gitpalp.view.activity.ProfileActivity;
@@ -97,50 +103,46 @@ public class LoginActivityVM extends ViewModel {
     }
 
     private void login() {
+        isProgressVisible.set(true);
 
         String credentials = email.get() + ":" + password.get();
         final String basic =
                 "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 
-        LoginRequest loginRequest   = new LoginRequest();
-        loginRequest.appKey         = context.getString(R.string.client_id);
-        loginRequest.appSecret      = context.getString(R.string.client_secret_id);
-        loginRequest.note           = GithubUtils.getDeviceDescription();
-        loginRequest.fingerprint    = GithubUtils.getHashedDeviceId();
-        loginRequest.scopes         = Collections.singletonList("public_repo");
 
 
-        addSubscription(RestApiClient.getInstance()
-                .auth()
-                .getAuthorizations(basic)
+        addSubscription(new GetAuthorization(basic).getTask(context)
                 .doOnNext(loginResponses    -> onCheckAlreadyExistUser(basic, loginResponses))
-                .flatMap(loginResponse      -> RestApiClient.getInstance().auth()
-                        .login(basic, loginRequest))
+                .flatMap(loginResponse      -> new Login(basic).getTask(context))
                 .map(loginResponse1         -> loginResponse1.token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onGetTokenSuccess, this::onGetTokenError));
+                .subscribe(this::onGetTokenSuccess, throwable -> {
+                    isProgressVisible.set(false);
+                    Toast.makeText(context, throwable.toString(), Toast.LENGTH_SHORT).show();
+                    if(throwable instanceof UnknownHostException || throwable instanceof NullPointerException) {
+                        MessageDialog.getErrorDialog(context, context.getString(R.string.error_no_internet));
+                    } else {
+                        MessageDialog.getErrorDialog(context, throwable.getMessage());
+                    }
+                }));
     }
 
     private void onCheckAlreadyExistUser(String basic, List<LoginResponse> loginResponses) {
         for (LoginResponse loginResponse : loginResponses) {
             String fingerprint = loginResponse.fingerprint;
             if (fingerprint != null && fingerprint.equals(GithubUtils.getHashedDeviceId())){
-                addSubscription(RestApiClient.getInstance()
-                        .auth().delete(basic, loginResponse.id).subscribe());
+                addSubscription(new ClearAuthorization(basic, loginResponse.id)
+                        .getTask(context).subscribe());
             }
         }
     }
 
     private void onGetTokenSuccess(String token) {
+        isProgressVisible.set(false);
         DataStorage.saveToken(token);
         ProfileActivity.startItAlone(context);
     }
-
-    private void onGetTokenError(Throwable throwable) {
-        MessageDialog.getErrorDialog(context, throwable.getMessage());
-    }
-
 
 
     public enum FieldType {

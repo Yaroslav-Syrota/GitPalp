@@ -24,14 +24,14 @@ import ua.com.thinkmobiles.gitpalp.model.response.SearchQueryResponse;
 public interface ApiAuthorithation {
 
     @POST("authorizations")
-    Observable<LoginResponse> login(@Header("Authorization") String _credentials,
-                                    @Body LoginRequest _loginRequest);
+    Observable<LoginResponse> login(@Header("Authorization") String credentials,
+                                    @Body LoginRequest loginRequest);
 
     @GET("authorizations")
-    Observable<List<LoginResponse>> getAuthorizations(@Header("Authorization") String _credentials);
+    Observable<List<LoginResponse>> getAuthorizations(@Header("Authorization") String credentials);
 
     @DELETE("authorizations/{id}")
-    Observable<ResponseBody> delete(@Header("Authorization") String _credentials,
+    Observable<ResponseBody> delete(@Header("Authorization") String credentials,
                                     @Path("id") String id);
 
 }

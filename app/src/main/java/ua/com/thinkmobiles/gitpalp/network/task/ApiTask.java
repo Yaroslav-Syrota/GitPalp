@@ -50,6 +50,7 @@ public abstract class ApiTask<R> extends ObservableTask<R> {
             if (throwable instanceof UnknownHostException) {
                 errorResponse = new ErrorResponse(ErrorResponse.INTERNET_MISSING);
                 errorResponse.setError(throwable.getMessage());
+                errorResponse.setThrowable(throwable);
             } else if (throwable instanceof SocketTimeoutException) {
                 errorResponse = new ErrorResponse(ErrorResponse.TIME_OUT_EXCEPTION);
                 errorResponse.setError(throwable.getMessage());

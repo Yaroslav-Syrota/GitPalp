@@ -58,4 +58,8 @@ public class RestApiClient {
     public ApiAuthorithation auth() {
         return retrofit.create(ApiAuthorithation.class);
     }
+
+    public ApiRepository repo() {
+        return retrofit.create(ApiRepository.class);
+    }
 }

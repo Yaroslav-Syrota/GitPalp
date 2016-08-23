@@ -7,8 +7,17 @@ import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.List;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import ua.com.thinkmobiles.gitpalp.data.DataStorage;
+import ua.com.thinkmobiles.gitpalp.model.response.CurrentUserRepositories;
+import ua.com.thinkmobiles.gitpalp.model.response.CurrentUserResponse;
+import ua.com.thinkmobiles.gitpalp.network.RestApiClient;
 import ua.com.thinkmobiles.gitpalp.utils.CircleTransform;
 import ua.com.thinkmobiles.gitpalp.view.activity.RepositoryActivity;
+import ua.com.thinkmobiles.gitpalp.view.dialog.MessageDialog;
 import ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.SearchRowVM;
 
 /**
@@ -28,6 +37,25 @@ public class ProfileActivityVM extends SearchRowVM {
         super(context, backClicklistener, isBackVisible);
         this.context    = context;
         circleTransform = new CircleTransform(context);
+        profileRequest();
+    }
+
+    private void profileRequest() {
+        addSubscription(RestApiClient.getInstance().repo().getCurrentUser(DataStorage.getToken())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onGetTokenSuccess, this::onGetTokenError));
+    }
+
+    private void onGetTokenSuccess(CurrentUserResponse response) {
+        CurrentUserResponse list = response;
+        avatar.set(list.avatarUrl);
+        name.set(list.login);
+        description.set(list.htmlUrl + " ; public Repo: " + list.publicRepos);
+    }
+
+    private void onGetTokenError(Throwable throwable) {
+        MessageDialog.getErrorDialog(context, throwable.getMessage());
     }
 
     @Override
