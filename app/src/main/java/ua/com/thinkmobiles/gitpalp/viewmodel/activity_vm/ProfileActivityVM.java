@@ -2,31 +2,28 @@ package ua.com.thinkmobiles.gitpalp.viewmodel.activity_vm;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import ua.com.thinkmobiles.gitpalp.data.DataStorage;
 import ua.com.thinkmobiles.gitpalp.model.response.CurrentUserRepositories;
 import ua.com.thinkmobiles.gitpalp.model.response.CurrentUserResponse;
-import ua.com.thinkmobiles.gitpalp.network.RestApiClient;
+import ua.com.thinkmobiles.gitpalp.network.task.GetOwnerRepositories;
+import ua.com.thinkmobiles.gitpalp.network.task.GetProfile;
 import ua.com.thinkmobiles.gitpalp.utils.CircleTransform;
 import ua.com.thinkmobiles.gitpalp.view.activity.RepositoryActivity;
 import ua.com.thinkmobiles.gitpalp.view.dialog.MessageDialog;
+import ua.com.thinkmobiles.gitpalp.view.recycler.OwnerRepositoryAdapter;
 import ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.SearchRowVM;
 
 /**
  * Created by CAT_Caterpiller on 21.08.2016.
  */
 
-public class ProfileActivityVM extends SearchRowVM {
-
-    public final ObservableBoolean isProgressVisible = new ObservableBoolean(false);
+public class ProfileActivityVM extends SearchRowVM<CurrentUserRepositories> {
 
     public final ObservableField<String> avatar         = new ObservableField<>();
     public final ObservableField<String> name           = new ObservableField<>();
@@ -37,24 +34,37 @@ public class ProfileActivityVM extends SearchRowVM {
         super(context, backClicklistener, isBackVisible);
         this.context    = context;
         circleTransform = new CircleTransform(context);
+        recyclerAdapter = new OwnerRepositoryAdapter();
         profileRequest();
     }
 
     private void profileRequest() {
-        addSubscription(RestApiClient.getInstance().repo().getCurrentUser(DataStorage.getToken())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onGetTokenSuccess, this::onGetTokenError));
+        isProgressVisible.set(true);
+        addSubscription(new GetProfile(DataStorage.getToken()).getTask(context)
+                .subscribe(this::onProfileSuccess, this::onResponseError));
     }
 
-    private void onGetTokenSuccess(CurrentUserResponse response) {
+    private void onProfileSuccess(CurrentUserResponse response) {
         CurrentUserResponse list = response;
-        avatar.set(list.avatarUrl);
-        name.set(list.login);
-        description.set(list.htmlUrl + " ; public Repo: " + list.publicRepos);
+        avatar.set(response.avatarUrl);
+        name.set(response.login);
+        description.set("public Repo: " + list.publicRepos + " /  " + response.htmlUrl);
+        repositoryRequest();
     }
 
-    private void onGetTokenError(Throwable throwable) {
+    private void repositoryRequest() {
+        addSubscription(new GetOwnerRepositories(DataStorage.getToken()).getTask(context)
+                .subscribe(this::onRepositoriesSuccess, this::onResponseError));
+    }
+
+    private void onRepositoriesSuccess(List<CurrentUserRepositories> repositories) {
+        loadFinished();
+
+        recyclerAdapter.clearAllData();
+        recyclerAdapter.addData((ArrayList) repositories);
+    }
+
+    private void onResponseError(Throwable throwable) {
         MessageDialog.getErrorDialog(context, throwable.getMessage());
     }
 

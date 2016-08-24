@@ -32,38 +32,30 @@
                     android:layout_height="wrap_content"
                     android:elevation="0dp">
 
-                    <LinearLayout
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap">
 
-                        <include layout="@layout/row_profile"
+                        <include
                             android:id="@+id/profile_row_PA"
-                            app:viewModel="@{viewModel}"/>
-                    </LinearLayout>
+                            layout="@layout/row_profile"
+                            app:viewModel="@{viewModel}" />
+                    </FrameLayout>
+
+                    <include
+                        android:id="@+id/search_row_PA"
+                        layout="@layout/row_search"
+                        app:viewModel="@{viewModel}" />
                 </android.support.design.widget.AppBarLayout>
 
-                <android.support.v4.widget.NestedScrollView
+                <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fillViewport="true"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:recyclerAdapter="@{viewModel.recyclerAdapter}"
+                    app:recyclerManager="@{viewModel.layoutManager}" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <include layout="@layout/row_search"
-                            android:id="@+id/search_row_PA"
-                            app:viewModel="@{viewModel}"/>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-                    </LinearLayout>
-                </android.support.v4.widget.NestedScrollView>
             </android.support.design.widget.CoordinatorLayout>
         </LinearLayout>
 
@@ -74,7 +66,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:indeterminate="true"
-            android:visibility="@{viewModel.isProgressVisible ? View.VISIBLE : View.GONE}"/>
+            android:visibility="@{viewModel.isProgressVisible ? View.VISIBLE : View.GONE}" />
 
     </RelativeLayout>
 </layout>

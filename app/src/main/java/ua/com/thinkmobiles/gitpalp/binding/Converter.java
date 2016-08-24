@@ -3,6 +3,8 @@ package ua.com.thinkmobiles.gitpalp.binding;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -113,5 +115,17 @@ public abstract class Converter {
             glideBuilder.into(imageView);
         }
         else imageView.setImageDrawable(defaultDrawable);
+    }
+
+    @BindingAdapter({"recyclerManager"})
+    public static void setRecyclerManager(final RecyclerView view,
+                                          @NonNull RecyclerView.LayoutManager manager) {
+        view.setLayoutManager(manager);
+    }
+
+    @BindingAdapter({"recyclerAdapter"})
+    public static void setRecyclerAdapter(final RecyclerView view,
+                                          @NonNull RecyclerView.Adapter adapter) {
+        view.setAdapter(adapter);
     }
 }

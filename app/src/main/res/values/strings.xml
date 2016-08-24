@@ -24,4 +24,7 @@
     <string name="error_no_internet">No internet connection</string>
     <string name="error_timeout">Request timeout</string>
     <string name="error_unknown">Unknown error</string>
+
+    <!--   Repository activity   -->
+    <string name="description_is_missing">No description available</string>
 </resources>
