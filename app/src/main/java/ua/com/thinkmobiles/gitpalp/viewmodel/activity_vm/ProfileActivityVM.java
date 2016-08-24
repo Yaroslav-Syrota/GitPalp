@@ -15,7 +15,6 @@ import ua.com.thinkmobiles.gitpalp.network.task.GetOwnerRepositories;
 import ua.com.thinkmobiles.gitpalp.network.task.GetProfile;
 import ua.com.thinkmobiles.gitpalp.utils.CircleTransform;
 import ua.com.thinkmobiles.gitpalp.view.activity.RepositoryActivity;
-import ua.com.thinkmobiles.gitpalp.view.dialog.MessageDialog;
 import ua.com.thinkmobiles.gitpalp.view.recycler.OwnerRepositoryAdapter;
 import ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.SearchRowVM;
 
@@ -45,10 +44,12 @@ public class ProfileActivityVM extends SearchRowVM<CurrentUserRepositories> {
     }
 
     private void onProfileSuccess(CurrentUserResponse response) {
-        CurrentUserResponse list = response;
-        avatar.set(response.avatarUrl);
-        name.set(response.login);
-        description.set("public Repo: " + list.publicRepos + " /  " + response.htmlUrl);
+        if(response != null) {
+            avatar.set(response.avatarUrl);
+            name.set(response.login);
+            description.set("public Repo: " + response.publicRepos + " /  " + response.htmlUrl);
+        }
+
         repositoryRequest();
     }
 
@@ -64,12 +65,12 @@ public class ProfileActivityVM extends SearchRowVM<CurrentUserRepositories> {
         recyclerAdapter.addData((ArrayList) repositories);
     }
 
-    private void onResponseError(Throwable throwable) {
-        MessageDialog.getErrorDialog(context, throwable.getMessage());
-    }
-
     @Override
     public void clickSearch(View view) {
-        context.startActivity(new Intent(context, RepositoryActivity.class));
+        if(search.get().length() >= 3) {
+            Intent intent = new Intent(context, RepositoryActivity.class);
+            intent.putExtra(RepositoryActivity.SEARCH, search.get());
+            context.startActivity(intent);
+        }
     }
 }

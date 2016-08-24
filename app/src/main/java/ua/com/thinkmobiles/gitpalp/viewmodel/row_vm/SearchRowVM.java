@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import ua.com.thinkmobiles.gitpalp.binding.BindableString;
+import ua.com.thinkmobiles.gitpalp.view.dialog.MessageDialog;
 import ua.com.thinkmobiles.gitpalp.view.recycler.BaseRecyclerAdapter;
 import ua.com.thinkmobiles.gitpalp.viewmodel.ViewModel;
 
@@ -39,6 +40,10 @@ public abstract class SearchRowVM<T> extends ViewModel {
 
     protected void loadFinished() {
         isProgressVisible.set(false);
+    }
+
+    protected void onResponseError(Throwable throwable) {
+        MessageDialog.getErrorDialog(context, throwable.getMessage());
     }
 
     public abstract void clickSearch(View view);

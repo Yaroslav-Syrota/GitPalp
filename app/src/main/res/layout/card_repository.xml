@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.RepositoryItemVM" />
+    </data>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_RD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/container_padding_quart"
+        android:layout_marginRight="@dimen/container_padding_quart"
+        android:padding="@dimen/container_padding_half"
+        card_view:cardBackgroundColor="@color/base_white"
+        card_view:cardElevation="7dp"
+        card_view:cardUseCompatPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/BaseTheme.TextView.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@{viewModel.title}"
+                tools:text="title"/>
+
+            <TextView
+                style="@style/BaseTheme.TextView.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@{viewModel.description}"
+                tools:text="description" />
+
+            <TextView
+                style="@style/BaseTheme.TextView.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@{viewModel.url}"
+                android:textColor="@color/colorAccent"
+                tools:text="description" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    style="@style/BaseTheme.TextView.Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@{viewModel.date}"
+                    tools:text="date"/>
+
+                <TextView
+                    style="@style/BaseTheme.TextView.Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="@{viewModel.language}"
+                    tools:text="count"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</layout>

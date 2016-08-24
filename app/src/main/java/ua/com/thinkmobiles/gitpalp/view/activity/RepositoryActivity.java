@@ -17,6 +17,8 @@ import ua.com.thinkmobiles.gitpalp.viewmodel.row_vm.SearchRowVM;
 
 public class RepositoryActivity extends BaseActivity implements SearchRowVM.BackClicklistener{
 
+    public static final String SEARCH = "search";
+
     public ActivityRepositoryBinding    repositoryBinding;
     private RepositoryActivityVM        repositoryActivityVM;
 
@@ -25,8 +27,13 @@ public class RepositoryActivity extends BaseActivity implements SearchRowVM.Back
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String search = "";
+        if(getIntent() != null) {
+            search = getIntent().getStringExtra(SEARCH);
+        }
+
         injectDataBinding(repositoryBinding     = DataBindingUtil.setContentView(this, R.layout.activity_repository));
-        injectViewModel(repositoryActivityVM    = new RepositoryActivityVM(this, this, true));
+        injectViewModel(repositoryActivityVM    = new RepositoryActivityVM(this, this, true, search));
         repositoryBinding                      .setViewModel(repositoryActivityVM);
     }
 

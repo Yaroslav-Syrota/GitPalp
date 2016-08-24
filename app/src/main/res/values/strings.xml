@@ -27,4 +27,5 @@
 
     <!--   Repository activity   -->
     <string name="description_is_missing">No description available</string>
+    <string name="no_language">No language information</string>
 </resources>

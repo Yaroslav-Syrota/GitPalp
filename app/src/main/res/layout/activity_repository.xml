@@ -24,7 +24,9 @@
         <android.support.v7.widget.RecyclerView
             android:layout_below="@+id/search_row_RA"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:recyclerAdapter="@{viewModel.recyclerAdapter}"
+            app:recyclerManager="@{viewModel.layoutManager}"/>
 
         <ProgressBar
             style="@style/ProgressBarStyle"

@@ -54,6 +54,7 @@
             android:layout_toLeftOf="@id/btnSearch_RS"
             android:textColor="@color/primaryText"
             android:textColorHint="@color/secondaryText"
+            android:textCursorDrawable="@drawable/shape_edittext_cursor"
             android:hint="@string/search"
             app:bindableString="@{viewModel.search}"
             android:background="@drawable/bg_search_field"/>
